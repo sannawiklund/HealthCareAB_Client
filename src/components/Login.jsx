@@ -77,12 +77,12 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5148/api/auth/login",
+        "http://localhost:5148/api/Auth/login",
         credentials,
         {
           withCredentials: true,
           // using withCredentials is crutial for and request that needs to check authorization!
-          // so remember to user this if neede
+          // so remember to user this if needed
         }
       );
 

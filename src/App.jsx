@@ -25,7 +25,7 @@ function App() {
             <Route
               path="/user/dashboard"
               element={
-                <RequireAuth allowedRoles={["User"]}>
+                <RequireAuth allowedRoles={["user"]}>
                   <UserDashboard />
                 </RequireAuth>
               }
@@ -33,7 +33,7 @@ function App() {
             <Route
               path="/admin/dashboard"
               element={
-                <RequireAuth allowedRoles={["Admin"]}>
+                <RequireAuth allowedRoles={["admin"]}>
                   <AdminDashboard />
                 </RequireAuth>
               }
