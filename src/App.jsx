@@ -11,12 +11,11 @@ import AdminDashboard from "./components/AdminDashboard";
 import Unauthorized from "./components/Unauthorized";
 import Home from "./components/Home";
 import RequireAuth from "./components/RequireAuth";
-import GlobalStyle from "./styles/GlobalStyle";
+import './index.css';
 
 function App() {
   return (
     <AuthProvider>
-      <GlobalStyle />
       <div className="content">
         <Router>
           <Routes>

@@ -1,27 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import Logo from "../assets/health_care_logo.svg";
-import styled from "styled-components";
 import Logout from "./Logout";
+
 // admin page, can only visit if you have role ADMIN
-const AdminContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const LogoContainer = styled.img`
-  height: 20rem;
-`;
-
-const Title = styled.h2`
-  font-size: 22px;
-`;
-
-const Text = styled.p`
-  font-size: 18px;
-`;
 
 function AdminDashboard() {
   const {
@@ -30,12 +12,14 @@ function AdminDashboard() {
   const [users, setUsers] = useState([]);
 
   return (
-    <AdminContainer>
-      <LogoContainer src={Logo} />
-      <Title>Admin Dashboard</Title>
-      <Text>Welcome, {user}!</Text>
+
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <img src={Logo} alt="Logo" className="h-80" />
+      <h2 className="text-2xl font-semibold mt-6">Admin Dashboard</h2>
+      <p className="text-lg mt-2">Welcome, {user}!</p>
       <Logout />
-    </AdminContainer>
+    </div>
+
   );
 }
 
