@@ -11,6 +11,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import Unauthorized from "./components/Unauthorized";
 import Home from "./components/Home";
 import RequireAuth from "./components/RequireAuth";
+import Register from "./components/Register"; 
 import './index.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="/register" element={<Register />} /> 
             <Route
               path="/user/dashboard"
               element={
