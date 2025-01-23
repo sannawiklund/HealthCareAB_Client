@@ -1,63 +1,9 @@
-import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+
 // login page
-const LoginContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const LoginButton = styled.button`
-  cursor: pointer;
-  padding: 10px 30px;
-  background-color: #057d7a;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-  margin-top: 40px;
-  transition: background-color 0.3s ease, transform 0.2s ease,
-    box-shadow 0.2s ease;
-  text-align: center;
-  border: none;
-
-  &:hover {
-    background-color: #2fadaa;
-    transform: translateY(-3px);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 22px;
-`;
-
-const FormWrapper = styled.form`
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  width: 350px;
-  gap: 10px;
-`;
-
-const StyledInput = styled.input`
-  font-size: 16px;
-  border: 1px solid #ddd;
-  background-color: #fafafa;
-  border-radius: 5px;
-  padding: 5px 0px;
-
-  &:focus {
-    outline: none;
-  }
-`;
 
 function Login() {
   const { setAuthState } = useAuth();
@@ -111,29 +57,53 @@ function Login() {
   };
 
   return (
-    <LoginContainer>
-      <Title>Login</Title>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <FormWrapper onSubmit={handleLogin}>
-        <label>Username: </label>
-        <StyledInput
-          name="username"
-          type="text"
-          value={credentials.username}
-          onChange={handleInputChange}
-          required
-        />
-        <label>Password: </label>
-        <StyledInput
-          name="password"
-          type="password"
-          value={credentials.password}
-          onChange={handleInputChange}
-          required
-        />
-        <LoginButton type="submit">Login</LoginButton>
-      </FormWrapper>
-    </LoginContainer>
+
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <h1 className="text-3xl font-bold mb-6">Login</h1>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <form
+          className="bg-white p-6 rounded shadow-md w-full max-w-sm"
+          onSubmit={handleLogin}
+        >
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2" htmlFor="username">
+              Username:
+            </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              value={credentials.username}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2" htmlFor="password">
+              Password:
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value={credentials.password}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+
+    </>
   );
 }
 
