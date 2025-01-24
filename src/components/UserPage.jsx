@@ -58,30 +58,30 @@ function UserPage() {
                     <h2>Personal information</h2>
                     {/* Mha userdata && kollar man så userData är truthy */}
                     {userData &&
-                        <p>Username: {userData.username ?? 'Inget värde angivet'} </p>
+                        <p>Username: {userData.username ?? 'No value given'} </p>
                     }
                     {userData &&
-                        <p>Gender: {userData.gender ?? 'Inget värde angivet'} </p>
+                        <p>Gender: {userData.gender ?? 'No value given'} </p>
                     }
                     {userData &&
-                        <p>Date of birth: {userData.dateOfBirth ?? 'Inget värde angivet'} </p>
+                        <p>Date of birth: {userData.dateOfBirth ?? 'No value given'} </p>
                     }
 
                     <h2>Contact information</h2>
                     {userData &&
-                        <p>Name: {userData.firstName ?? 'Inget värde angivet'} </p>
+                        <p>Name: {userData.firstName ?? 'No value given'} </p>
                     }
                     {userData &&
-                        <p>Surname: {userData.lastName ?? 'Inget värde angivet'} </p>
+                        <p>Surname: {userData.lastName ?? 'No value given'} </p>
                     }
                     {userData &&
-                        <p>Address: {userData.address ?? 'Inget värde angivet'} </p>
+                        <p>Address: {userData.address ?? 'No value given'} </p>
                     }
                     {userData &&
-                        <p>Email: {userData.email ?? 'Inget värde angivet'} </p>
+                        <p>Email: {userData.email ?? 'No value given'} </p>
                     }
                     {userData &&
-                        <p>Phone: {userData.phone ?? 'Inget värde angivet'} </p>
+                        <p>Phone: {userData.phone ?? 'No value given'} </p>
                     }
 
                 </div>
