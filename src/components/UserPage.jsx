@@ -4,20 +4,15 @@ import axios from "axios";
 import Logo from "../assets/health_care_logo.svg";
 
 function UserPage() {
-    // Checks for auth.
+    // Checks for auth state
     const { authState } = useAuth();
     const { user } = authState;
 
-    console.log("Auth state on UserPage:", authState);
+    //Plockar ut userId och använder i get-strängen. Kanske inte optimal lösning
     const userId = authState.userId;
-    console.log(userId);
-    //Detta ger mig rätt userId
-
 
     const [userData, setUserData] = useState();
-
     const [error, setError] = useState();
-
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -25,10 +20,10 @@ function UserPage() {
                 const response = await axios.get(
                     `http://localhost:5148/userpage/${userId}`,
                 );
-                const test = await response.data;
-                console.log(test);
 
-                setUserData(test);
+                //Inväntar respons från databasen för att den inte ska kasta error direkt och fastna där.
+                const userInformation = await response.data;
+                setUserData(userInformation);
 
             }
             catch (error) {
@@ -36,7 +31,7 @@ function UserPage() {
             }
         };
 
-        //Check ifall användaren uppdateras, isf hämtas ny data. Denna borde kunna förfinas.
+        //Check ifall användaren uppdateras, isf hämtas ny data
         if (userId) {
             fetchUserData();
         }
@@ -48,25 +43,48 @@ function UserPage() {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-                <img src={Logo} alt="Logo" className="h-80" />
-                <h2 className="text-2xl font-semibold mt-6">Your Profile</h2>
-                {/* Might add possibility to add a picure later, which would be shown here */}
-                {userData && 
-                <p className="text-lg mt-2"> Hej {userData.firstName}  </p>
-                }
-            </div>
+            <div className="flex flex-col items-center min-h-screen bg-gray-100">
 
-            <div>
-                <h2>Personal information</h2>
-                <p>Profession: { } </p>
-                <p>Date of birth: { } </p>
+                <div>
+                    <img src={Logo} alt="Logo" className="h-80" />
+                    <h2 className="text-2xl font-semibold mt-6">Your Profile</h2>
+                    {/* Might add possibility to add a picure later, which would be shown here */}
+                    {userData &&
+                        <p className="text-lg mt-2"> Hej {userData.firstName}  </p>
+                    }
+                </div>
 
-                <h2>Contact information</h2>
-                <p>Address: { } </p>
-                <p>Email: { } </p>
-                <p>Phone: { } </p>
+                <div>
+                    <h2>Personal information</h2>
+                    {/* Mha userdata && kollar man så userData är truthy */}
+                    {userData &&
+                        <p>Username: {userData.username ?? 'Inget värde angivet'} </p>
+                    }
+                    {userData &&
+                        <p>Gender: {userData.gender ?? 'Inget värde angivet'} </p>
+                    }
+                    {userData &&
+                        <p>Date of birth: {userData.dateOfBirth ?? 'Inget värde angivet'} </p>
+                    }
 
+                    <h2>Contact information</h2>
+                    {userData &&
+                        <p>Name: {userData.firstName ?? 'Inget värde angivet'} </p>
+                    }
+                    {userData &&
+                        <p>Surname: {userData.lastName ?? 'Inget värde angivet'} </p>
+                    }
+                    {userData &&
+                        <p>Address: {userData.address ?? 'Inget värde angivet'} </p>
+                    }
+                    {userData &&
+                        <p>Email: {userData.email ?? 'Inget värde angivet'} </p>
+                    }
+                    {userData &&
+                        <p>Phone: {userData.phone ?? 'Inget värde angivet'} </p>
+                    }
+
+                </div>
             </div>
         </>
     )
