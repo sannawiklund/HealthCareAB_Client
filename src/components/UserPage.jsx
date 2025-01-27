@@ -23,6 +23,14 @@ function UserPage() {
 
                 //Inväntar respons från databasen för att den inte ska kasta error direkt och fastna där.
                 const userInformation = await response.data;
+
+                //Konverterar datumsträngen, klipper bort tiden genom split vid T.
+                if (userInformation.dateOfBirth) {
+                    userInformation.dateOfBirth = new Date(userInformation.dateOfBirth)
+                        .toISOString()
+                        .split("T")[0];
+                }
+
                 setUserData(userInformation);
 
             }
