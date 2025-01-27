@@ -4,17 +4,32 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function ScheduleAvailability() {
-  const {
-    authState: { user },
-  } = useAuth();
-  const navigate = useNavigate();
+  // Hämta authState
+  const { authState } = useAuth();
+  const userId = authState.userId;
 
+  // Lokal state för datumhantering
   const [selectedDates, setSelectedDates] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
 
+  const navigate = useNavigate();
+
   const handleAddDate = () => {
+    // Kolla om valt datum är i det förflutna
+    const selectedDateTime = new Date(currentDate);
+    const currentDateTime = new Date();
+
+    if (selectedDateTime < currentDateTime) {
+      alert("You cannot select a past date.");
+      return; // Avbryt om datumet är i det förflutna
+    }
+
     if (currentDate) {
-      setSelectedDates((prevDates) => [...prevDates, new Date(currentDate)]);
+      // Lägg till en timme till det valda datumet
+      selectedDateTime.setHours(selectedDateTime.getHours() + 1);
+
+      // Lägg till det justerade datumet i state
+      setSelectedDates((prevDates) => [...prevDates, selectedDateTime]);
       setCurrentDate("");
     }
   };
@@ -24,13 +39,24 @@ function ScheduleAvailability() {
   };
 
   const handleSubmit = async () => {
+    // Kontrollera om användaren har lagt till minst ett datum
+    if (selectedDates.length === 0) {
+      alert("Please select and add at least one time slot first.");
+      return; // Avbryt om ingen tid har lagts till
+    }
+
     try {
-      const caregiverId = user; // Assumes the `user` contains the caregiver's ID
-      const response = await axios.post(`http://localhost:5148//availability/${user}`, {
-        caregiverId,
-        availableSlots: selectedDates.map((date) => date.toISOString()),
-      });
-  
+      const response = await axios.post(
+        `http://localhost:5148/availability/${userId}`,
+        {
+          caregiverId: userId, // Använd userId från authState
+          availableSlots: selectedDates.map((date) => date.toISOString()),
+        },
+        {
+          withCredentials: true, // Viktigt för att skicka cookies
+        }
+      );
+
       if (response.status === 201) {
         alert("Availability successfully added!");
         navigate("/admin/dashboard");
@@ -39,7 +65,7 @@ function ScheduleAvailability() {
       console.error("Error response:", error.response);
       alert("Failed to add availability. Please try again.");
     }
-  };  
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
