@@ -14,6 +14,8 @@ import RequireAuth from "./components/RequireAuth";
 import Register from "./components/Register"; 
 import './index.css';
 
+import ScheduleAvailability from "./components/scheduleAvaliability";
+
 function App() {
   return (
     <AuthProvider>
@@ -23,6 +25,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="/register" element={<Register />} /> 
+            {/* <Route path="/scheduleavaliability" element={<ScheduleAvaliability />} />  */}
             <Route
               path="/user/dashboard"
               element={
@@ -36,6 +39,14 @@ function App() {
               element={
                 <RequireAuth allowedRoles={["admin"]}>
                   <AdminDashboard />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/scheduleavaliability"
+              element={
+                <RequireAuth allowedRoles={["admin"]}>
+                  <ScheduleAvailability />
                 </RequireAuth>
               }
             />
