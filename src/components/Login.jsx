@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate, Link } from "react-router-dom"; 
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const { setAuthState } = useAuth();
@@ -28,12 +28,13 @@ function Login() {
         }
       );
 
-      const { loggedInUser, roles } = response.data;
+      const { loggedInUser, roles, userId } = response.data;
 
       setAuthState({
         isAuthenticated: true,
         user: loggedInUser,
         roles: roles,
+        userId: userId
       });
 
       if (roles.includes("admin")) {

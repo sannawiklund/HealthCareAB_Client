@@ -12,6 +12,7 @@ import Unauthorized from "./components/Unauthorized";
 import Home from "./components/Home";
 import RequireAuth from "./components/RequireAuth";
 import Register from "./components/Register"; 
+import UserPage from "./components/UserPage";
 import './index.css';
 
 import ScheduleAvailability from "./components/scheduleAvaliability";
@@ -52,6 +53,7 @@ function App() {
             />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/userpage" element={<UserPage/>} />
           </Routes>
         </Router>
       </div>
