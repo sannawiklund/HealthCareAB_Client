@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+
 // custom route component to make sure private routes work based on roles
 // is used in App for UserDashboard and AdminDashboard
 function RequireAuth({ children, allowedRoles }) {
