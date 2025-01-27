@@ -19,6 +19,9 @@ function UserPage() {
             try {
                 const response = await axios.get(
                     `http://localhost:5148/userpage/${userId}`,
+                    {
+                        withCredentials: true // Viktigt för att cookies skickas med
+                    }
                 );
 
                 //Inväntar respons från databasen för att den inte ska kasta error direkt och fastna där.
@@ -57,13 +60,13 @@ function UserPage() {
                 <div className="text-center w-full max-w-md">
                     <img src={Logo} alt="Logo" className="h-48 mx-auto" />
                     <h2 className="text-2xl font-semibold mt-4 text-gray-800">Your Profile</h2>
-                     {/* Might add possibility to add a profile picure later, which would be shown here */}
+                    {/* Might add possibility to add a profile picure later, which would be shown here */}
                     {userData && (
                         <p className="text-lg mt-2 text-gray-600">Hello, {userData.firstName}</p>
                     )}
                 </div>
 
-                <div className="w-full max-w-md mt-8 bg-cyan-50 rounded-2xl shadow-lg p-6">
+                <div className="w-full max-w-md mt-8 bg-cyan-50 rounded-2xl shadow-lg p-6 mb-10">
                     <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">Personal Information</h2>
                     <div className="mt-4 space-y-2 text-gray-800">
                         {/* Mha userdata && kollar man så userData är truthy */}
