@@ -28,13 +28,15 @@ function Login() {
         }
       );
 
-      const { loggedInUser, roles, userId } = response.data;
-
+      const { username, roles, userId } = response.data;
+      
+      console.log("Response from server:", response.data); // Detta kommer att visa hela svaret från servern
+      // Se till att vi sätter 'user' till det hämtade 'username'
       setAuthState({
         isAuthenticated: true,
-        user: loggedInUser,
+        user: username,  // Sätt användarnamnet här
         roles: roles,
-        userId: userId
+        userId: userId,
       });
 
       if (roles.includes("admin")) {
