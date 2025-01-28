@@ -28,13 +28,13 @@ function Login() {
         }
       );
 
-      const { loggedInUser, roles, userId } = response.data;
-
+      const { username, roles, userId } = response.data;
+      
       setAuthState({
         isAuthenticated: true,
-        user: loggedInUser,
+        user: username,
         roles: roles,
-        userId: userId
+        userId: userId,
       });
 
       if (roles.includes("admin")) {
