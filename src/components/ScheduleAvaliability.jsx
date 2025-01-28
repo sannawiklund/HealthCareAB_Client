@@ -4,31 +4,28 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function ScheduleAvailability() {
-  // Hämta authState
   const { authState } = useAuth();
   const userId = authState.userId;
 
-  // Lokal state för datumhantering
   const [selectedDates, setSelectedDates] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
-
   const navigate = useNavigate();
 
   const handleAddDate = () => {
-    // Kolla om valt datum är i det förflutna
+   
     const selectedDateTime = new Date(currentDate);
     const currentDateTime = new Date();
 
     if (selectedDateTime < currentDateTime) {
       alert("You cannot select a past date.");
-      return; // Avbryt om datumet är i det förflutna
+      return; 
     }
 
     if (currentDate) {
-      // Lägg till en timme till det valda datumet
+      
       selectedDateTime.setHours(selectedDateTime.getHours() + 1);
 
-      // Lägg till det justerade datumet i state
+      
       setSelectedDates((prevDates) => [...prevDates, selectedDateTime]);
       setCurrentDate("");
     }
@@ -39,21 +36,21 @@ function ScheduleAvailability() {
   };
 
   const handleSubmit = async () => {
-    // Kontrollera om användaren har lagt till minst ett datum
+   
     if (selectedDates.length === 0) {
       alert("Please select and add at least one time slot first.");
-      return; // Avbryt om ingen tid har lagts till
+      return; 
     }
 
     try {
       const response = await axios.post(
         `http://localhost:5148/availability/${userId}`,
         {
-          caregiverId: userId, // Använd userId från authState
+          caregiverId: userId, 
           availableSlots: selectedDates.map((date) => date.toISOString()),
         },
         {
-          withCredentials: true, // Viktigt för att skicka cookies
+          withCredentials: true, 
         }
       );
 

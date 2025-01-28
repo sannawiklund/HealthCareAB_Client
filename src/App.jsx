@@ -26,7 +26,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="/register" element={<Register />} /> 
-            {/* <Route path="/scheduleavaliability" element={<ScheduleAvaliability />} />  */}
             <Route
               path="/user/dashboard"
               element={
