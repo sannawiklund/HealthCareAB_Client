@@ -30,11 +30,9 @@ function Login() {
 
       const { username, roles, userId } = response.data;
       
-      console.log("Response from server:", response.data); // Detta kommer att visa hela svaret från servern
-      // Se till att vi sätter 'user' till det hämtade 'username'
       setAuthState({
         isAuthenticated: true,
-        user: username,  // Sätt användarnamnet här
+        user: username,
         roles: roles,
         userId: userId,
       });
