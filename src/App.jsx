@@ -15,6 +15,8 @@ import Register from "./components/Register";
 import UserPage from "./components/UserPage";
 import './index.css';
 
+import ScheduleAvailability from "./components/scheduleAvaliability";
+
 function App() {
   return (
     <AuthProvider>
@@ -37,6 +39,14 @@ function App() {
               element={
                 <RequireAuth allowedRoles={["admin"]}>
                   <AdminDashboard />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/scheduleavaliability"
+              element={
+                <RequireAuth allowedRoles={["admin"]}>
+                  <ScheduleAvailability />
                 </RequireAuth>
               }
             />
