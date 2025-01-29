@@ -27,15 +27,16 @@ function UserDashboard() {
           `http://localhost:5148/upcoming/${userId}`,
 
           {
-            withCredentials: true 
+            withCredentials: true
           }
         );
 
         const upcoming = await response.data;
-        // Det går endast att köra en sort om det finns mer än ett element i listan, detta kontrollerades inte innan
-        if (upcoming.length > 1) {
+
+        if (upcoming.length > 0) {
           upcoming.sort((a, b) => new Date(a.appointmentTime) - new Date(b.appointmentTime));
         }
+        
         setUpcomingAppointments(upcoming);
       } catch (error) {
         setError(error.response ? error.response.data : "Error fetching upcoming appointments");
@@ -55,14 +56,16 @@ function UserDashboard() {
           `http://localhost:5148/history/${userId}`,
 
           {
-            withCredentials: true 
+            withCredentials: true
           }
 
         );
         const history = await response.data;
-        if (history.length > 1) {
+
+        if (history.length > 0) {
           history.sort((a, b) => new Date(a.appointmentTime) - new Date(b.appointmentTime));
         }
+
         setAppointmentHistory(history);
       } catch (error) {
         setError(error.response ? error.response.data : "Error fetching appointment history");
