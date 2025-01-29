@@ -5,6 +5,7 @@ import Logo from "../assets/health_care_logo.svg";
 import Logout from "./Logout";
 import axios from "axios";
 import React from "react";
+import Booking from "./Booking";
 
 function UserDashboard() {
   // using custom hook to check if the user i authenticated and has the correct role
@@ -93,7 +94,7 @@ function UserDashboard() {
         {/* Navigation Section */}
         <div className="grid grid-cols-3 gap-4 mb-6 sm:border-none">
           <button
-            onClick={() => navigate("/book")}
+            onClick={() => navigate("/booking")}
             className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg sm:border-0"
           >
             <div className="w-10 h-10 bg-[#06B6D4] text-white flex items-center justify-center rounded-md mb-2">
