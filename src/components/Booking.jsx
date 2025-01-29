@@ -19,13 +19,12 @@ function Booking() {
                     `http://localhost:5148/availability/${userId}`,
                     { withCredentials: true }
                 );
+
+                const timeNow = new Date();
                 
-                // Sort the available slots by date and time (earliest to latest)
-                const sortedSlots = response.data.sort((a, b) => {
-                    const dateA = new Date(a.availableSlots);
-                    const dateB = new Date(b.availableSlots);
-                    return dateA - dateB; // Sorts in ascending order
-                });
+                const sortedSlots = response.data
+                .filter(slot => new Date(slot.availableSlots) > timeNow) // Filtrerar bort tider som passerat
+                .sort((a, b) => new Date(a.availableSlots) - new Date(b.availableSlots)); //Sorterar så närmst i tid kommer först
 
                 setAvailableSlots(sortedSlots);
             } catch (error) {
