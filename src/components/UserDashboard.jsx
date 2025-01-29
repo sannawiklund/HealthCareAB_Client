@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"; // Importera useNavigate
 import Logo from "../assets/health_care_logo.svg";
 import Logout from "./Logout";
 import axios from "axios";
+import Booking from "./Booking";
 
 function UserDashboard() {
   // using custom hook to check if the user i authenticated and has the correct role
@@ -88,7 +89,7 @@ function UserDashboard() {
         {/* Button Row Section */}
         <div className="mt-8 flex justify-center space-x-4">
           <button
-            onClick={() => navigate("/book")} // Navigera till /book
+            onClick={() => navigate("/booking")} // Navigera till /book
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           >
             Book

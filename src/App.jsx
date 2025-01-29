@@ -14,6 +14,7 @@ import RequireAuth from "./components/RequireAuth";
 import Register from "./components/Register"; 
 import UserPage from "./components/UserPage";
 import './index.css';
+import Booking from "./components/Booking";
 
 import ScheduleAvailability from "./components/scheduleAvaliability";
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="/register" element={<Register />} /> 
+
             <Route
               path="/user/dashboard"
               element={
@@ -50,6 +52,15 @@ function App() {
                 </RequireAuth>
               }
             />
+            <Route
+              path="/booking"
+              element={
+                <RequireAuth allowedRoles={["user"]}>
+                  <Booking />
+                </RequireAuth>
+              }
+            />
+            
             <Route path="/" element={<Home />} />
             <Route path="*" element={<Navigate to="/" replace />} />
             <Route path="/userpage" element={<UserPage/>} />
