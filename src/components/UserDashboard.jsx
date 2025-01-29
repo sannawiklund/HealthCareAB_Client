@@ -32,7 +32,10 @@ function UserDashboard() {
         );
 
         const upcoming = await response.data;
-        // upcoming.sort((a, b) => new Date(a.appointmentTime) - new Date(b.appointmentTime));
+        // Det går endast att köra en sort om det finns mer än ett element i listan, detta kontrollerades inte innan
+        if (upcoming.length > 1) {
+          upcoming.sort((a, b) => new Date(a.appointmentTime) - new Date(b.appointmentTime));
+        }
         setUpcomingAppointments(upcoming);
       } catch (error) {
         setError(error.response ? error.response.data : "Error fetching upcoming appointments");
@@ -57,7 +60,9 @@ function UserDashboard() {
 
         );
         const history = await response.data;
-        // history.sort((a, b) => new Date(a.appointmentTime) - new Date(b.appointmentTime));
+        if (history.length > 1) {
+          history.sort((a, b) => new Date(a.appointmentTime) - new Date(b.appointmentTime));
+        }
         setAppointmentHistory(history);
       } catch (error) {
         setError(error.response ? error.response.data : "Error fetching appointment history");
