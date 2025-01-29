@@ -46,25 +46,28 @@ function Booking() {
     // Vad som händer när man trycker på "Boka" (POST)
     const handleSubmit = async (slot) => {
         try {
+            // Konvertera tillbaka till rätt ISO-format
+            const formattedDateTime = new Date(slot.availableSlots).toISOString();
+    
             const response = await axios.post(
                 `http://localhost:5148/${userId}`,
-                { slot: slot.availableSlots },
+                { 
+                    CaregiverId: slot.caregiverId,
+                    AppointmentTime: formattedDateTime, // Skicka omformaterad tid
+                },
                 { withCredentials: true }
             );
-
-            if (response.status === 201) {
+    
+            if (response.status === 200) {
                 setSuccessMessage("Booking successfully added!");
-                navigate("/user/dashboard"); // Navigate after successful booking
+                navigate("/user/dashboard");
             }
         } catch (error) {
             console.error("Error:", error.response);
             setError("Failed to add booking. Please try again.");
         }
     };
-
-    // Spara bokningen
-    //     const handleSaveBooking = () => {
-    //     }
+    
 
     return (
         <div className="container mx-auto p-4">
@@ -86,6 +89,7 @@ function Booking() {
                                 {formatDateAndTime(slot.availableSlots)}
                             </p>
 
+                            {console.log(slot)}
                             <button
                                 className="mt-4 bg-cyan-500 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg"
                                 onClick={() => handleSubmit(slot)} // Trigger handleSubmit on button click
