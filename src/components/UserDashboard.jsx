@@ -32,6 +32,7 @@ function UserDashboard() {
         );
 
         const upcoming = await response.data;
+        upcoming.sort((a, b) => new Date(b.appointmentTime) - new Date(a.appointmentTime));
         setUpcomingAppointments(upcoming);
       } catch (error) {
         setError(error.response ? error.response.data : "Error fetching upcoming appointments");
@@ -56,6 +57,7 @@ function UserDashboard() {
 
         );
         const history = await response.data;
+        history.sort((a, b) => new Date(b.appointmentTime) - new Date(a.appointmentTime));
         setAppointmentHistory(history);
       } catch (error) {
         setError(error.response ? error.response.data : "Error fetching appointment history");
@@ -92,7 +94,7 @@ function UserDashboard() {
         <div className="grid grid-cols-3 gap-4 mb-6 sm:border-none">
           <button
             onClick={() => navigate("/book")}
-            className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg sm:border sm:border-gray-300 sm:hover:border-blue-500 sm:hover:border-2 sm:border-0"
+            className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg sm:border-0"
           >
             <div className="w-10 h-10 bg-[#06B6D4] text-white flex items-center justify-center rounded-md mb-2">
               {/* Calendar icon from Material Symbols */}
