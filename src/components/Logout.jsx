@@ -19,7 +19,9 @@ const Logout = () => {
       });
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return  <button 
+  onClick={handleLogout} 
+  className="bg-[#06B6D4] text-white p-2 rounded shadow-md hover:bg-[#0398a6] transition duration-200 ease-in-out">Logout</button>;
 };
 
 export default Logout;

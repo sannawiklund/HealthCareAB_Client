@@ -64,7 +64,6 @@ function UserPage() {
                 editedData,
                 { withCredentials: true }
             );
-
             setSuccessMessage(response.data);
             setIsEditing(false);
             setUserData(editedData)
