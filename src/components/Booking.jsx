@@ -10,6 +10,7 @@ function Booking() {
 
     const [availableSlots, setAvailableSlots] = useState([]);
     const [error, setError] = useState();
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         const getAvailableTimeSlots = async () => {
@@ -18,15 +19,22 @@ function Booking() {
                     `http://localhost:5148/availability/${userId}`,
                     { withCredentials: true }
                 );
-                setAvailableSlots(response.data);
+                
+                // Sort the available slots by date and time (earliest to latest)
+                const sortedSlots = response.data.sort((a, b) => {
+                    const dateA = new Date(a.availableSlots);
+                    const dateB = new Date(b.availableSlots);
+                    return dateA - dateB; // Sorts in ascending order
+                });
+
+                setAvailableSlots(sortedSlots);
             } catch (error) {
                 setError(error.response ? error.response.data.message : "An error occurred");
             }
         };
 
         getAvailableTimeSlots();
-
-    }, []);
+    }, [userId]);
 
     // Function to format date and time
     const formatDateAndTime = (dateTime) => {
@@ -36,20 +44,26 @@ function Booking() {
         return `Date: ${formattedDate} | Time: ${formattedTime}`;
     };
 
-     //     // Vad som händer när man trycker på "Boka" (POST)
-    //    const handleSubmit = async () => { 
-    //     if (response.status === 201) {
-    //         alert("Booking successfully added!");
-    //         navigate("/user/dashboard");
-    //       }
-    //     } catch (error) {
-    //       console.error("Error response:", error.response);
-    //       alert("Failed to add booking. Please try again.");
-    //     }
-    //     //Inväntar respons från databasen för att den inte ska kasta error direkt och fastna där.
-    //     const avaliableSlots = await response.data;
-    //     }
-    //     // Spara bokningen
+    // Vad som händer när man trycker på "Boka" (POST)
+    const handleSubmit = async (slot) => {
+        try {
+            const response = await axios.post(
+                `http://localhost:5148/${userId}`,
+                { slot: slot.availableSlots },
+                { withCredentials: true }
+            );
+
+            if (response.status === 201) {
+                setSuccessMessage("Booking successfully added!");
+                navigate("/user/dashboard"); // Navigate after successful booking
+            }
+        } catch (error) {
+            console.error("Error:", error.response);
+            setError("Failed to add booking. Please try again.");
+        }
+    };
+
+    // Spara bokningen
     //     const handleSaveBooking = () => {
     //     }
 
@@ -75,17 +89,20 @@ function Booking() {
 
                             <button
                                 className="mt-4 bg-cyan-500 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg"
-                                onClick={() => console.log(`Book time: ${slot.availableSlots}`)}
+                                onClick={() => handleSubmit(slot)} // Trigger handleSubmit on button click
                             >
                                 Book
                             </button>
                         </div>
+
+                        //Lägg till en knapp som heter "Return" eller liknande som routar till UserDashboard om man ångrar sig. Just nu finns det inget sätt att backa
                     ))
                 ) : (
                     <p className="text-gray-500 text-center col-span-full">No available slots at the moment.</p>
                 )}
             </div>
 
+            {successMessage && <p className="text-green-500 mt-4 text-center">{successMessage}</p>}
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
         </div>
     );
