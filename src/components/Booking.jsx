@@ -10,7 +10,6 @@ function Booking() {
 
     const [availableSlots, setAvailableSlots] = useState([]);
     const [error, setError] = useState();
-    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         const getAvailableTimeSlots = async () => {
@@ -70,7 +69,7 @@ function Booking() {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Available Time Slots</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center">Available Time Slots</h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {availableSlots.length > 0 ? (
@@ -83,29 +82,36 @@ function Booking() {
                                 Caregiver: {slot.caregiverId}
                             </p>
 
-                            {/* Display formatted date and time */}
                             <p className="text-sm text-gray-600 mb-4">
                                 {formatDateAndTime(slot.availableSlots)}
                             </p>
 
-                            {console.log(slot)}
                             <button
-                                className="mt-4 bg-cyan-500 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg"
-                                onClick={() => handleSubmit(slot)} // Trigger handleSubmit on button click
+                                className="mt-2 bg-cyan-500 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg"
+                                onClick={() => handleSubmit(slot)}
                             >
                                 Book
                             </button>
                         </div>
-
-                        //Lägg till en knapp som heter "Return" eller liknande som routar till UserDashboard om man ångrar sig. Just nu finns det inget sätt att backa
                     ))
                 ) : (
-                    <p className="text-gray-500 text-center col-span-full">No available slots at the moment.</p>
+                    <p className="text-gray-500 text-center col-span-full">
+                        No available slots at the moment.
+                    </p>
                 )}
             </div>
 
-            {successMessage && <p className="text-green-500 mt-4 text-center">{successMessage}</p>}
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+
+            {/* Return-knapp centrerad under sista raden */}
+            <div className="flex justify-center mt-6">
+                <button
+                    className="bg-cyan-800 hover:bg-cyan-950 text-white font-semibold py-2 px-6 rounded-lg"
+                    onClick={() => navigate("/user/dashboard")}
+                >
+                    Return to Dashboard
+                </button>
+            </div>
         </div>
     );
 }
