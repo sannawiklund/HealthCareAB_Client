@@ -19,8 +19,6 @@ function UserPage() {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            console.log("Edited Data:", editedData); // Loggar data innan den skickas
-
             try {
                 const response = await axios.get(
                     `http://localhost:5148/userpage/${userId}`,
@@ -66,8 +64,6 @@ function UserPage() {
                 editedData,
                 { withCredentials: true }
             );
-            console.log("Response:", response.data); // Loggar framgångsrik respons från servern
-
             setSuccessMessage(response.data);
             setIsEditing(false);
             setUserData(editedData)
