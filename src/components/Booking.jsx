@@ -21,10 +21,10 @@ function Booking() {
                 );
 
                 const timeNow = new Date();
-                
+
                 const sortedSlots = response.data
-                .filter(slot => new Date(slot.availableSlots) > timeNow) // Filtrerar bort tider som passerat
-                .sort((a, b) => new Date(a.availableSlots) - new Date(b.availableSlots)); //Sorterar så närmst i tid kommer först
+                    .filter(slot => new Date(slot.availableSlots) > timeNow) // Filtrerar bort tider som passerat
+                    .sort((a, b) => new Date(a.availableSlots) - new Date(b.availableSlots)); //Sorterar så närmst i tid kommer först
 
                 setAvailableSlots(sortedSlots);
             } catch (error) {
@@ -48,26 +48,25 @@ function Booking() {
         try {
             // Konvertera tillbaka till rätt ISO-format
             const formattedDateTime = new Date(slot.availableSlots).toISOString();
-    
+
             const response = await axios.post(
                 `http://localhost:5148/${userId}`,
-                { 
+                {
                     CaregiverId: slot.caregiverId,
                     AppointmentTime: formattedDateTime, // Skicka omformaterad tid
                 },
                 { withCredentials: true }
             );
-    
+
             if (response.status === 200) {
-                setSuccessMessage("Booking successfully added!");
+                alert("Booking successfully added!");
                 navigate("/user/dashboard");
             }
         } catch (error) {
-            console.error("Error:", error.response);
-            setError("Failed to add booking. Please try again.");
+            console.error("Error response:", error.response);
+            alert("Failed to add booking. Please try again.");
         }
     };
-    
 
     return (
         <div className="container mx-auto p-4">
