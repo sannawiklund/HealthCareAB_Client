@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Logo from "../assets/health_care_logo.svg";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -29,7 +30,7 @@ function Login() {
       );
 
       const { username, roles, userId } = response.data;
-      
+
       setAuthState({
         isAuthenticated: true,
         user: username,
@@ -49,7 +50,10 @@ function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">Login</h1>
+      <div className="text-center w-full max-w-lg">
+        <img src={Logo} alt="Logo" className="h-48 mx-auto" />
+      </div>
+      {/* <h1 className="text-3xl font-bold mb-6">Login</h1> */}
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form
         className="bg-white p-6 rounded shadow-md w-full max-w-sm"
