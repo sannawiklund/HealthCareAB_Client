@@ -84,11 +84,11 @@ function UserDashboard() {
 
   return (
     <>
-      <div className="relative min-h-screen p-10 bg-white">
-        {/* Logga ut-knapp längst upp till höger */}
-        <div className="absolute top-4 right-4">
-        </div>
+    <div className="relative min-h-screen p-10 bg-white">
+      {/* Logga ut-knapp längst upp till höger */}
+      <div className="absolute top-4 right-4">
         <Logout />
+      </div>
 
         {/* Header Section */}
         <div className="flex flex-col items-center">
