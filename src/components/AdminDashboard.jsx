@@ -55,6 +55,7 @@ function AdminDashboard() {
     }
   }, [userId]);
 
+
   useEffect(() => {
     const fetchAppointments = async () => {
       const token = localStorage.getItem("authToken");
@@ -147,13 +148,8 @@ function AdminDashboard() {
           </label>
         </div>
 
-        {/* Lista över antingen available slots eller appointments */}
         <div className="w-full max-w-xl mx-auto">
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p className="text-red-500">{error}</p>
-          ) : isShowingAppointments ? (
+          {isShowingAppointments ? (
             appointments.length > 0 ? (
               <div>
                 {/* Scheduled section */}
