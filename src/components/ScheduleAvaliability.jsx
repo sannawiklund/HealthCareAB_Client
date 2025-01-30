@@ -100,6 +100,15 @@ function ScheduleAvailability() {
       >
         Save Availability
       </button>
+
+      <div className="flex justify-center mt-6">
+                        <button
+                            className="bg-cyan-800 hover:bg-cyan-950 text-white font-semibold py-2 px-6 rounded-lg"
+                            onClick={() => navigate("/admin/dashboard")}
+                        >
+                            Return to Dashboard
+                        </button>
+                    </div>
     </div>
   );
 }

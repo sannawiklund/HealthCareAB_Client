@@ -57,7 +57,7 @@ function Register() {
         <h2 className="text-2xl font-semibold mt-4 text-gray-800 mb-4">Register</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
       </div>
-  
+
       <form
         className="w-full max-w-md bg-cyan-50 rounded-2xl shadow-lg p-6"
         onSubmit={handleRegister}
@@ -74,7 +74,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
@@ -86,7 +86,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">First Name</label>
             <input
@@ -98,7 +98,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Last Name</label>
             <input
@@ -110,7 +110,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
@@ -122,7 +122,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Phone</label>
             <input
@@ -134,7 +134,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Address</label>
             <input
@@ -146,7 +146,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
             <input
@@ -158,7 +158,7 @@ function Register() {
               className="p-1 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
             />
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Gender</label>
             <select
@@ -174,7 +174,7 @@ function Register() {
               <option value="Other">Other</option>
             </select>
           </div>
-  
+
           <div>
             <label className="block text-sm font-medium text-gray-700">Roles</label>
             <div className="flex space-x-4 mt-1">
@@ -198,14 +198,25 @@ function Register() {
               </label>
             </div>
           </div>
-  
+
           <button
             type="submit"
             className="w-full py-2 px-4 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-cyan-600"
           >
             Register
           </button>
+
+          {/* Return-knapp centrerad under sista raden */}
+          <div className="flex justify-center mt-6">
+            <button
+              className="bg-cyan-800 hover:bg-cyan-950 text-white font-semibold py-2 px-6 rounded-lg"
+              onClick={() => navigate("/login")}
+            >
+              Return to Login
+            </button>
+          </div>
         </div>
+
       </form>
     </div>
   );
