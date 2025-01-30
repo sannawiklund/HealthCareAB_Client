@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import axios from "axios";
 import Logo from "../assets/health_care_logo.svg";
+import { useNavigate } from "react-router-dom";
 
 function UserPage() {
+
+    const navigate = useNavigate();
+    
     // Checks for auth state
     const { authState } = useAuth();
     const { user } = authState;
@@ -93,7 +97,7 @@ function UserPage() {
 
                 {/* User information section */}
                 <div className="w-full max-w-md mt-8 bg-cyan-50 rounded-2xl shadow-lg p-6 mb-10">
-                    
+
                     <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">
                         Personal Information</h2>
 
@@ -137,7 +141,7 @@ function UserPage() {
 
                     <h2 className="text-xl font-semibold text-gray-800 border-b pb-2 mt-3">
                         Contact Information</h2>
-                    
+
                     {/* Om editing är true visas edit mode, annars bara datan */}
                     <div className="mt-2 space-y-3">
                         {isEditing ? (
@@ -229,6 +233,16 @@ function UserPage() {
                             Edit Information
                         </button>
                     )}
+                    {/* Return-knapp centrerad under sista raden */}
+                    <div className="flex justify-center mt-6">
+                        <button
+                            className="bg-cyan-800 hover:bg-cyan-950 text-white font-semibold py-2 px-6 rounded-lg"
+                            onClick={() => navigate("/user/dashboard")}
+                        >
+                            Return to Dashboard
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </>
