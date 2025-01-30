@@ -31,13 +31,19 @@ function AdminDashboard() {
 
         console.log("Response Data:", response.data);
 
-        const availableSlots = response.data.map((slot) => {
-          return {
-            date: new Date(slot), // Omvandla till Date objekt
-            formattedDate: new Date(slot).toLocaleDateString(), // Läsbart format
-            startTime: new Date(slot).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Endast tid
-          };
-        });
+        const timeNow = new Date(); // Hämtar aktuell tid
+
+        const availableSlots = response.data
+          .map((slot) => {
+            const dateObj = new Date(slot);
+            return {
+              date: dateObj,
+              formattedDate: dateObj.toLocaleDateString(),
+              startTime: dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            };
+          })
+          .filter(slot => slot.date > timeNow) // Filtrerar bort passerade tider
+          .sort((a, b) => a.date - b.date); // Sorterar tiderna i kronologisk ordning
         setSlots(availableSlots);
       } catch (error) {
         setError(error.response ? error.response.data : "Error fetching available slots");
@@ -92,7 +98,7 @@ function AdminDashboard() {
         {/* Available Slots Section */}
         <div className="w-full max-w-xl mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">
-          Your availability
+            Your availability
           </h2>
 
           {/* List of Available Slots */}
@@ -104,8 +110,8 @@ function AdminDashboard() {
                   className="p-4 rounded-lg shadow-sm mb-4 border bg-[#E0F7FA] border-[#06B6D4]"
                 >
                   <p className="text-lg font-medium text-black">Slot</p>
-                  <p className="text-sm text-gray-500">Date: {slot.formattedDate}</p>
                   <p className="text-sm text-gray-500">Time: {slot.startTime}</p>
+                  <p className="text-sm text-gray-500">Date: {slot.formattedDate}</p>
                 </li>
               ))}
             </ul>
