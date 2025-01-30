@@ -29,8 +29,6 @@ function AdminDashboard() {
           }
         );
 
-        console.log("Response Data:", response.data);
-
         const timeNow = new Date(); // Hämtar aktuell tid
 
         const availableSlots = response.data
