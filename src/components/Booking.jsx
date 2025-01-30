@@ -21,7 +21,19 @@ function Booking() {
 
                 const timeNow = new Date();
 
-                const sortedSlots = response.data
+                let individualSlots = [];
+
+                for (let i = 0; i < response.data.length; i++) {
+                    const slots = response.data[i];
+                    for (let o = 0; o < slots.availableSlots.length; o++) {
+                        individualSlots.push({
+                            "caregiverId": slots.caregiverId,
+                            "availableSlots": slots.availableSlots[o]
+                        });
+                    }
+                }
+
+                const sortedSlots = individualSlots
                     .filter(slot => new Date(slot.availableSlots) > timeNow) // Filtrerar bort tider som passerat
                     .sort((a, b) => new Date(a.availableSlots) - new Date(b.availableSlots)); //Sorterar så närmst i tid kommer först
 
